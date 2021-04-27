@@ -1,6 +1,4 @@
-
-name: deployDev
-
+name: deployDev.yml
 on: 
   push:
     paths:
