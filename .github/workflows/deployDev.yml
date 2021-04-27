@@ -2,7 +2,7 @@ name: deployDev.yml
 on: 
   push:
     paths:
-      - '.github/workflows/**'
+      - '.github/workflows/deployDev.yml'
 
 jobs:      
   build-and-deploy:

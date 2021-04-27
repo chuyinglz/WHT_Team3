@@ -24,6 +24,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore Application\src\RazorPagesTestSample\RazorPagesTestSample.csproj
     - name: Build
-      run: dotnet build --configuration Release --no-restore Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet build --configuration Release --no-restore Application\src\RazorPagesTestSample\RazorPagesTestSample.csproj
     - name: Test
-      run: dotnet test --no-restore --verbosity normal Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet test --no-restore --verbosity normal Application\src\RazorPagesTestSample\RazorPagesTestSample.csproj
