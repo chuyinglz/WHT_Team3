@@ -1,3 +1,4 @@
+name: deployDev.yml
 on: 
   push:
     paths:
@@ -16,4 +17,3 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: rg-wth-group3
         template: ARM-Templates/container-webapp-template.json
-        
