@@ -5,7 +5,7 @@
         "webAppName": {
             "defaultValue": "whtsc-devops-dev",
             "type": "String"
-        },
+        }, 
         "hostingPlanName": {
             "defaultValue": "whtsc-devops-asp",
             "type": "String"
