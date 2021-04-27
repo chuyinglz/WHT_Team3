@@ -31,9 +31,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      registryName: ${{ 'whtscreg' }}
-      repositoryName: ${{ 'wth/dotnetcoreapp' }}
-      dockerFolderPath: ${{ 'Application/aspnet-core-dotnet-core' }}
+      registryName: whtscreg.azurecr.io
+      repositoryName: wth/dotnetcoreapp
+      dockerFolderPath: Application/aspnet-core-dotnet-core
       tag: github.run_number
 
     steps:
