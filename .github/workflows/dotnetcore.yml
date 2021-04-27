@@ -29,28 +29,20 @@ jobs:
 
   job:
     runs-on: ubuntu-latest
+
+    env:
+      registryName: ${{ 'whtscreg' }}
+      repositoryName: ${{ 'wth/dotnetcoreapp' }}
+      dockerFolderPath: ${{ 'Application/aspnet-core-dotnet-core' }}
+      tag: github.run_number
+
     steps:
     - uses: actions/checkout@v2
     - name: Docker login
-      env:
-        registryName : ${{ 'whtscreg' }}
-        repositoryName : ${{ 'wth/dotnetcoreapp' }}
-        dockerFolderPath : ${{ 'Application/aspnet-core-dotnet-core' }}
-        tag : github.run_number
       uses: docker $registryName -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
     - name: Docker build
-      env:
-        registryName : ${{ 'whtscreg' }}
-        repositoryName : ${{ 'wth/dotnetcoreapp' }}
-        dockerFolderPath : ${{ 'Application/aspnet-core-dotnet-core' }}
-        tag : github.run_number
       uses: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
     - name: Docker push
-      env:
-        registryName : ${{ 'whtscreg' }}
-        repositoryName : ${{ 'wth/dotnetcoreapp' }}
-        dockerFolderPath : ${{ 'Application/aspnet-core-dotnet-core' }}
-        tag : github.run_number
       uses: docker push $registryName/$repositoryName:$tag
 
 
