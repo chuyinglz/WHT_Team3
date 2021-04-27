@@ -23,11 +23,11 @@
             "type": "String"
         },
         "registryName": {
-            "defaultValue": "whtsc-devopsreg",
+            "defaultValue": "whtscdevopsreg",
             "type": "String"
         },
         "imageName": {
-            "defaultValue": "whtsc-devopsimage",
+            "defaultValue": "whtscdevopsimage",
             "type":"String"
         },
         "registryLocation": {
