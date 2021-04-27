@@ -3,7 +3,7 @@ name: .NET Core
 on:
   push:
     paths:
-      - '/Application/**'
+      - 'Application/**'
     branches: [ main ]
   pull_request:
     paths:
@@ -22,8 +22,8 @@ jobs:
       with:
         dotnet-version: 2.2
     - name: Install dependencies
-      run: dotnet restore /Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet restore Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Build
-      run: dotnet build /Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release --no-restore
+      run: dotnet build Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release --no-restore
     - name: Test
-      run: dotnet test /Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --no-restore --verbosity normal
+      run: dotnet test Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --no-restore --verbosity normal
