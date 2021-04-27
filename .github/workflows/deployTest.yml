@@ -1,0 +1,20 @@
+name: deployDev.yml
+on: 
+  push:
+    paths:
+      - '.github/workflows/deployTest.yml'
+
+jobs:      
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIAL }}
+    - uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: rg-wth-group3
+        template: ARM-Templates/container-webapp-template.json
+        
