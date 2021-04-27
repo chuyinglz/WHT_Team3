@@ -12,6 +12,6 @@ on:
         creds: ${{ secrets.AZURE_CREDENTIAL }}
     - uses: azure/arm-deploy@v1
       with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: rg-wth-group3
         template: ARM-Templates/container-webapp-template.json
-        parameters: storageAccountType=Standard_LRS
