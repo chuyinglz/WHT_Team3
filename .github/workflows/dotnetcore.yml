@@ -4,7 +4,6 @@ env:
   repositoryName: wth/dotnetcoreapp
   dockerFolderPath: Application/src/RazorPagesTestSample/
   tag: ${{ github.run_number }}
-  appName: whtsc-devops-dev
 
 on:
   push:
@@ -26,11 +25,11 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
     - name: Restore
-      run: dotnet restore Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet restore $dockerFolderPath/RazorPagesTestSample.csproj
     - name: Build
-      run: dotnet build --configuration Release --no-restore Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet build --configuration Release --no-restore $dockerFolderPath/RazorPagesTestSample.csproj
     - name: Test
-      run: dotnet test --no-restore --verbosity normal Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
+      run: dotnet test --no-restore --verbosity normal $dockerFolderPath/RazorPagesTestSample.csproj
 
   docker-build:
     runs-on: ubuntu-latest
@@ -75,7 +74,7 @@ jobs:
       with:
         app-name: whtsc-devops-dev
         slot-name: production
-        images: whtscreg.azurecr.io/wth/dotnetcoreapp:$tag
+        images: $registryName/$repositoryName/:$tag
     
     - name: Azure logout
       run: az logout
