@@ -72,10 +72,10 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIAL }}
     
     - name: webapp deploy      
-    - uses: azure/webapps-deploy@v2
+      uses: azure/webapps-deploy@v2
       with:
         app-name: $webappName
-        images: $registryName/$repositoryName:$tag
+        images: $registryName/$repositoryName:${{ github.sha }}
     
     - name: Azure logout
       run: az logout
