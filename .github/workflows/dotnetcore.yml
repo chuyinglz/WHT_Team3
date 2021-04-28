@@ -62,7 +62,7 @@ build-restore-test:
   deploy-to-dev:
     runs-on: ubuntu-latest
 
-    # checkout the repo
+    steps:
     - name: 'Checkout GitHub Action' 
       uses: actions/checkout@main
     
