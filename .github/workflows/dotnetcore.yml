@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
 
-  job:
+  Docker jobs:
     runs-on: ubuntu-latest
 
     env:
@@ -35,7 +35,6 @@ jobs:
       repositoryName: wth/dotnetcoreapp
       dockerFolderPath: Application/src/RazorPagesTestSample
       tag: ${{ github.run_number }}
-      webappName: RazorPagesTestSampleDev 
 
     steps:
     - uses: actions/checkout@v2
@@ -74,7 +73,7 @@ jobs:
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
       with:
-        app-name: $webappName
+        app-name: $repositoryName
         images: $registryName/$repositoryName:${{ github.sha }}
     
     - name: Azure logout
