@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
 
-  Docker jobs:
+  docker-jobs:
     runs-on: ubuntu-latest
 
     env:
