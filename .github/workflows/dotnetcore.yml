@@ -1,7 +1,7 @@
 name: .NET Core
 env:
   registryName: whtscreg.azurecr.io
-  repositoryName: dotnetcoreapp
+  repositoryName: wth/dotnetcoreapp
   dockerFolderPath: Application/src/RazorPagesTestSample/
   tag: ${{ github.run_number }}
   appName: whtsc-devops-dev
@@ -84,9 +84,9 @@ jobs:
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
       with:
-        app-name: $appName
+        app-name: whtsc-devops-dev
         slot-name: production
-        images: $registryName/$appName:$tag
+        images: whtscreg.azurecr.io/wth/dotnetcoreapp:$tag
     
     - name: Azure logout
       run: az logout
