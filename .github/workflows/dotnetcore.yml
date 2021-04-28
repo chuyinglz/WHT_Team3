@@ -16,9 +16,8 @@ on:
       - 'Application/**'
     branches: [ main ]
 
-build-restore-test:
-
-  build:
+jobs:
+  build-restor-test:
     runs-on: ubuntu-latest
 
     steps:
