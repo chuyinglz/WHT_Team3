@@ -74,7 +74,7 @@ jobs:
       with:
         app-name: whtsc-devops-dev
         slot-name: production
-        images: $registryName/$repositoryName/:$tag
+        images: wth/dotnetcoreapp:38
     
     - name: Azure logout
       run: az logout
