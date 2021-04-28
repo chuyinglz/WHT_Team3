@@ -57,10 +57,7 @@ jobs:
     #              title: "${{ env.build_name }} Workflow $tag Failed! ",
     #              body: body
     #            });
-    
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
+
     # checkout the repo
     - name: 'Checkout GitHub Action' 
       uses: actions/checkout@main
