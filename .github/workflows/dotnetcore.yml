@@ -33,7 +33,7 @@ jobs:
     env:
       registryName: whtscreg.azurecr.io
       repositoryName: wth/dotnetcoreapp
-      dockerFolderPath: Application/src/RazorPagesTestSample
+      dockerFolderPath: Application/src/RazorPagesTestSample/
       tag: ${{ github.run_number }}
 
     steps:
@@ -44,6 +44,7 @@ jobs:
       run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
     - name: Docker push
       run: docker push $registryName/$repositoryName:$tag
+
     #- name: Create Issue
     #- uses: actions/github-script@0.9.0
     #    if: failure()
@@ -69,9 +70,12 @@ jobs:
     
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
+      run: echo $repositoryName
+
       with:
         app-name: $repositoryName
-        images: $registryName/$repositoryName:${{ github.sha }}
+        slot-name: production
+        images: $registryName/$repositoryName:$tag
     
     - name: Azure logout
       run: az logout
