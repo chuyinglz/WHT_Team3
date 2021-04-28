@@ -35,6 +35,7 @@ jobs:
       repositoryName: wth/dotnetcoreapp
       dockerFolderPath: Application/src/RazorPagesTestSample/
       tag: ${{ github.run_number }}
+      appName: whtsc-devops-dev
 
     steps:
     - uses: actions/checkout@v2
@@ -67,13 +68,23 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIAL }}
-    
+        
+    - name: Move image to dev
+      uses: azure/docker-login@v1
+      with:
+        login-server: $registryName
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+    - run: |
+        docker build . -t $registryName/$appName:$tag
+        docker push $registryName/$appName:$tag    
+     
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
       with:
-        app-name: whtsc-devops-dev #$repositoryName
+        app-name: $appName
         slot-name: production
-        images: $registryName/$repositoryName:latest #$tag
+        images: $registryName/$appName:$tag
     
     - name: Azure logout
       run: az logout
