@@ -70,8 +70,7 @@ jobs:
     
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
-      run: echo $repositoryName
-
+      
       with:
         app-name: $repositoryName
         slot-name: production
