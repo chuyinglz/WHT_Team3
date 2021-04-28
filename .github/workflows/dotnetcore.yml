@@ -63,30 +63,19 @@ jobs:
 
     steps:
     - name: 'Checkout GitHub Action' 
-      uses: actions/checkout@main
+      uses: actions/checkout@v2
     
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIAL }}
-        
-    # - name: Move image to dev
-    #   uses: azure/docker-login@v1
-    #   with:
-    #     login-server: $registryName
-    #     username: ${{ secrets.ACR_USERNAME }}
-    #     password: ${{ secrets.ACR_PASSWORD }}
-    # - run: 
-    #   |
-    #     docker build . -t whtscreg.azurecr.io/whtsc-devops-dev:${{ github.sha }}
-    #     docker push whtscreg.azurecr.io/whtsc-devops-dev:${{ github.sha }}   
 
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
       with:
         app-name: whtsc-devops-dev
         slot-name: production
-        images: whtscreg.azurecr.io/wth/dotnetcoreapp:35
+        images: whtscreg.azurecr.io/wth/dotnetcoreapp:$tag
     
     - name: Azure logout
       run: az logout
