@@ -71,7 +71,7 @@ jobs:
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
       with:
-        app-name: $repositoryName
+        app-name: whtsc-devops-dev #$repositoryName
         slot-name: production
         images: $registryName/$repositoryName:$tag
     
