@@ -75,16 +75,16 @@ jobs:
         login-server: $registryName
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
-    - run: |
-        docker build . -t $registryName/$appName:$tag
-        docker push $registryName/$appName:$tag    
-     
+    - run: 
+        docker build . -t $registryName/$appName:${{ github.sha }}
+        docker push $registryName/$appName:${{ github.sha }}   
+
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
       with:
         app-name: $appName
         slot-name: production
-        images: $registryName/$appName:$tag
+        images: '$registryName/$appName:${{ github.sha }}'
     
     - name: Azure logout
       run: az logout
