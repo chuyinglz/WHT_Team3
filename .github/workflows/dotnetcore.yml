@@ -33,8 +33,8 @@ jobs:
     env:
       registryName: whtscreg.azurecr.io
       repositoryName: wth/dotnetcoreapp
-      dockerFolderPath: Application/aspnet-core-dotnet-core
-      tag: github.run_number
+      dockerFolderPath: Application/src/RazorPagesTestSample
+      tag: $github.run_number
 
     steps:
     - uses: actions/checkout@v2
