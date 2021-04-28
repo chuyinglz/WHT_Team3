@@ -1,4 +1,10 @@
 name: .NET Core
+env:
+  registryName: whtscreg.azurecr.io
+  repositoryName: dotnetcoreapp
+  dockerFolderPath: Application/src/RazorPagesTestSample/
+  tag: ${{ github.run_number }}
+  appName: whtsc-devops-dev
 
 on:
   push:
@@ -10,7 +16,7 @@ on:
       - 'Application/**'
     branches: [ main ]
 
-jobs:
+build-restore-test:
 
   build:
     runs-on: ubuntu-latest
@@ -27,15 +33,8 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
 
-  docker-jobs:
+  docker-build:
     runs-on: ubuntu-latest
-
-    env:
-      registryName: whtscreg.azurecr.io
-      repositoryName: wth/dotnetcoreapp
-      dockerFolderPath: Application/src/RazorPagesTestSample/
-      tag: ${{ github.run_number }}
-      appName: whtsc-devops-dev
 
     steps:
     - uses: actions/checkout@v2
@@ -60,6 +59,9 @@ jobs:
     #              body: body
     #            });
 
+  deploy-to-dev:
+    runs-on: ubuntu-latest
+
     # checkout the repo
     - name: 'Checkout GitHub Action' 
       uses: actions/checkout@main
@@ -69,23 +71,23 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIAL }}
         
-    - name: Move image to dev
-      uses: azure/docker-login@v1
-      with:
-        login-server: $registryName
-        username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
-    - run: 
-      |
-        docker build . -t whtscreg.azurecr.io/whtsc-devops-dev:${{ github.sha }}
-        docker push whtscreg.azurecr.io/whtsc-devops-dev:${{ github.sha }}   
+    # - name: Move image to dev
+    #   uses: azure/docker-login@v1
+    #   with:
+    #     login-server: $registryName
+    #     username: ${{ secrets.ACR_USERNAME }}
+    #     password: ${{ secrets.ACR_PASSWORD }}
+    # - run: 
+    #   |
+    #     docker build . -t whtscreg.azurecr.io/whtsc-devops-dev:${{ github.sha }}
+    #     docker push whtscreg.azurecr.io/whtsc-devops-dev:${{ github.sha }}   
 
     - name: webapp deploy      
       uses: azure/webapps-deploy@v2
       with:
         app-name: $appName
         slot-name: production
-        images: $registryName/$appName:${{ github.sha }}
+        images: $registryName/$appName:$tag
     
     - name: Azure logout
       run: az logout
