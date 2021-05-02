@@ -77,8 +77,8 @@ jobs:
       with:
         app-name: whtsc-devops-dev
         #slot-name: production
-        # images: $registryName/$repositoryName:$tag
-        images: ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }}
+        images: $registryName/$repositoryName:$tag
+        # images: ${{ env.registryName }}/${{ env.repositoryName }}:${{ env.tag }}
 
     - name: Azure logout
       run: az logout
