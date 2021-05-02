@@ -78,7 +78,8 @@ jobs:
         app-name: whtsc-devops-dev
         #slot-name: production
         # images: $registryName/$repositoryName:$tag
-        images: whtscreg.azurecr.io/wth/dotnetcoreapp:43
+        # images: whtscreg.azurecr.io/wth/dotnetcoreapp:43
+        images: ${{ env.registryName }}/${{ env.repositoryName }}:${{ github.run_number }}
 
     - name: Azure logout
       run: az logout
